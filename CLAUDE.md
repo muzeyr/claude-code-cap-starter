@@ -5,10 +5,10 @@ CAP flight demo scenario
 ## Architecture
 
 ```
-uzi-cap/
-├── db/schema.cds          → Data model (namespace: sap.fe.cap.travel)
-├── srv/analytics-service.cds   → OData v4 AnalyticsService
-├── app/travel_processor/       → Fiori Elements application
+<project>/
+├── db/schema.cds          → Data model
+├── srv/<service>.cds      → OData v4 service definition
+├── app/<app_dir>/         → Fiori Elements application
 │   └── webapp/test/wdi5/
 │       ├── specs/         → wdi5 test scenarios
 │       └── pageobjects/   → Page Object Model
@@ -16,17 +16,15 @@ uzi-cap/
 └── index.js               → Express server
 ```
 
-## Data Model (namespace: sap.fe.cap.travel)
+## Data Model
 
-- **Travel**
-- **Booking**
-- **BookingSupplement**
-- **BookingStatus**
-- **TravelStatus**
+- **EntityA**
+- **EntityB**
+- **Status**
 
 ## Services
 
-- **AnalyticsService**: OData v4, `//analytics/`
+- **<ServiceName>**: OData v4, `/path/`
 
 ## Database
 
@@ -36,17 +34,24 @@ uzi-cap/
 ## Commands
 
 ```bash
-npm run watch         # Development: cds watch (hot reload)
-npm start             # cds deploy && cds run
+npm install
 npm run setup:claude  # Re-run Claude Code setup
 ```
+
+## Using `.claude`
+
+This repository contains the Claude Code helper layer for SAP CAP. It is not a full CAP application by itself.
+
+- Use `npm run setup:claude` to refresh project context and regenerate skill docs.
+- Open Claude Code with `claude` after setup.
+- The `.claude/` folder provides hooks, templates, and persistent memory for CAP development.
 
 ## Testing (wdi5)
 
 - Framework: wdi5 (WebdriverIO + UI5 integration)
 - Pattern: Page Object Model
-- Specs: `app/travel_processor/webapp/test/wdi5/specs/`
-- Page objects: `app/travel_processor/webapp/test/wdi5/pageobjects/`
+- Specs: `app/<app_dir>/webapp/test/wdi5/specs/`
+- Page objects: `app/<app_dir>/webapp/test/wdi5/pageobjects/`
 
 ## Tech Stack
 

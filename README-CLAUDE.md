@@ -61,6 +61,18 @@ Supported languages (comma-separated, e.g: en,de,tr) [en]:
 claude
 ```
 
+### 4. How to use `.claude`
+
+This repository is a Claude Code helper layer for SAP CAP projects, not a full CAP application. Use `.claude` to generate context-aware documentation, skill templates, and hooks for your CAP project.
+
+- `.claude/setup.js` auto-detects your project and writes `CLAUDE.md`, skill `SKILL.md` files, and language config.
+- `.claude/settings.json` defines Claude Code hooks for file protection, CDS syntax checking, and schema/i18n sync.
+- `.claude/i18n-config.json` stores the supported languages for your app.
+- `.claude/templates/skills/` contains skill templates for CAP tasks like entities, services, auth, events, remote services, Fiori pages, and wdi5 tests.
+- `.claude/memory/` holds persistent project context for Claude.
+
+To apply `.claude` in a new CAP project, copy the `.claude/` folder into the project root, run `npm install`, then `npm run setup:claude`.
+
 Claude now knows your project's full context — namespace, entities, service paths, app structure — without you having to explain it every time.
 
 ---
@@ -88,6 +100,8 @@ db/data/<namespace>-Entity.csv ← Seed data
 ```
 Add a Supplier entity with name, email, country fields. Link it to Product.
 ```
+
+Use `${APP_DIR}` in the prompt examples when referring to the Fiori app path, for example `app/<app_dir>/webapp/test/wdi5/`.
 
 ---
 
@@ -183,7 +197,7 @@ Use a mock during development.
 
 **Example prompt:**
 ```
-Add a ListReport and ObjectPage for Suppliers in the travel_processor app.
+Add a ListReport and ObjectPage for Suppliers in the selected Fiori app directory.
 ```
 
 ---

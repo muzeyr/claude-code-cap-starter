@@ -32,10 +32,17 @@
 ## Commands
 
 ```bash
-npm run watch         # Development: cds watch (hot reload)
-npm start             # cds deploy && cds run
+npm install
 npm run setup:claude  # Re-run Claude Code setup
 ```
+
+## Using `.claude`
+
+This project contains the Claude Code tooling layer for SAP CAP. It is not a full runnable CAP application by itself.
+
+- Run `npm run setup:claude` after copying `.claude/` into a CAP project root.
+- Open Claude Code with `claude` once setup is complete.
+- Use `.claude/templates/skills/*/SKILL.md` as the skill reference for CAP development.
 
 ## Testing (wdi5)
 

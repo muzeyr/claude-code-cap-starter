@@ -1,14 +1,14 @@
 ---
 name: Project Context
-description: Technical structure of the sflight project
+description: Technical structure of the CAP starter template
 type: project
 ---
 
-sflight — CAP flight demo scenario
+This repository is a Claude Code starter layer for SAP CAP projects.
 
-**Namespace:** sap.fe.cap.travel
-**Service:** AnalyticsService (//analytics/)
-**App:** app/travel_processor/
+**Namespace:** (detected when you run `npm run setup:claude`)
+**Service:** (detected when you run `npm run setup:claude`)
+**App:** (detected when you run `npm run setup:claude`)
 
-**Why:** CAP + wdi5 learning/development project.
-**How to apply:** Follow CDS idioms, Fiori Elements constraints, and wdi5 Page Object Model patterns.
+**Why:** Provide a guide layer for CAP + wdi5 projects.
+**How to apply:** Copy `.claude/` into a CAP project root, run setup, and use the generated skill docs to follow CDS idioms, Fiori Elements constraints, and wdi5 Page Object Model patterns.
