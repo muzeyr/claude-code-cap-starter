@@ -29,6 +29,15 @@
 - SQLite (`wdi5.db`) — both development and production
 - Schema is created with `cds deploy`
 
+## SAP CAP & Node.js Global Rules
+
+- **Code Style:** Use CommonJS (`require` / `module.exports`) by default for CAP Node.js services.
+- **Error Handling:** Always use `req.error(code, msg)` instead of `throw new Error(...)` to let CAP handle messages.
+- **Transactions:** Always wrap database operations in `cds.tx(req)` to maintain transactional consistency.
+- **Entity Naming:** Entity names should always be **PascalCase Plurals** (e.g. `Books`, `Reviews`).
+- **i18n / UI Texts:** Do not hardcode UI text strings. Always use `@title: '{i18n>KEY}'` in `app/labels.cds` and add pairs to `i18n.properties` files.
+- **Validation:** Use CDS annotations (`@assert.range`, `@mandatory`) in `.cds` files before writing manual JS validation.
+
 ## Commands
 
 ```bash
