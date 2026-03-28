@@ -1,0 +1,12 @@
+{
+  "name": "claude-code-cap-starter",
+  "version": "1.0.0",
+  "description": "Claude Code configuration layer for SAP CAP projects — context-aware AI assistance with hooks, skill templates, and project memory",
+  "private": true,
+  "scripts": {
+    "setup:claude": "node .claude/setup.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

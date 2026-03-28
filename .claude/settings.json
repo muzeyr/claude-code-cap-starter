@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; echo \"$f\" | grep -qE '(\\.env$|wdi5\\.db$)' && echo '{\"decision\":\"block\",\"reason\":\"This file is protected.\"}' || true; } 2>/dev/null || true",
+            "statusMessage": "Checking protected files..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath' | { read -r f; echo \"$f\" | grep -qE '\\.cds$' && cds compile \"$f\" > /dev/null 2>&1 || { echo \"[CDS] Syntax error: $f\"; cds compile \"$f\" 2>&1 | head -5; }; } 2>/dev/null || true",
+            "statusMessage": "Checking CDS syntax..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "agent",
+            "if": "Edit(**/schema.cds)|Write(**/schema.cds)",
+            "prompt": "schema.cds was updated. Do two things:\n\n1) Sync CSV seed files:\n   Namespace: sap.fe.cap.travel. Run cds compile index.cds --to json. Read db/data/ files. Compare each CSV header (semicolon separator) against the entity schema. If there is a difference, update only the first (header) row — do not touch data rows. CAP rules: Association->fieldName_ID/code, no managed fields, no to-many, no LargeBinary.\n\n2) Sync i18n files:\n   Supported languages: en,de,tr. Language list is also in .claude/i18n-config.json.\n   Scan schema.cds for @title: '{i18n>KEY}' patterns and collect all KEY values.\n   For each app (if app/*/webapp/i18n/ directory exists) and each language:\n   - Check i18n.properties (default) + i18n_<lang>.properties files.\n   - Append missing KEYs at the end of the file. Do not touch existing keys.\n   - Use a human-readable form of the KEY as the value (camelCase -> spaced words).\n   - Example: ProductName = Product Name",
+            "timeout": 120,
+            "statusMessage": "Syncing CSV and i18n files..."
+          }
+        ]
+      }
+    ]
+  }
+}
